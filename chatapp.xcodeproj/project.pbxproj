@@ -15,6 +15,7 @@
 		439BB1A5278225EA0085F120 /* chatappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB1A4278225EA0085F120 /* chatappTests.swift */; };
 		439BB1B0278225EA0085F120 /* chatappUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB1AF278225EA0085F120 /* chatappUITests.swift */; };
 		43BACD62278244E300EE224D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43BACD60278244E300EE224D /* Main.storyboard */; };
+		43FC9DF12782647900F4D6AD /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FC9DF02782647900F4D6AD /* Api.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		439BB1AF278225EA0085F120 /* chatappUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatappUITests.swift; sourceTree = "<group>"; };
 		439BB1B1278225EA0085F120 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43BACD61278244E300EE224D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = chatapp/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
+		43FC9DF02782647900F4D6AD /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		439BB18C278225E90085F120 /* chatapp */ = {
 			isa = PBXGroup;
 			children = (
+				43FC9DEF2782646E00F4D6AD /* Api */,
 				439BB1C3278226CA0085F120 /* App */,
 				439BB1C2278226A20085F120 /* Chat Screen */,
 				439BB196278225EA0085F120 /* Assets.xcassets */,
@@ -142,6 +145,22 @@
 				439BB18F278225E90085F120 /* SceneDelegate.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		43FC9DEF2782646E00F4D6AD /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				43FC9DF52782678E00F4D6AD /* Models */,
+				43FC9DF02782647900F4D6AD /* Api.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		43FC9DF52782678E00F4D6AD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,6 +295,7 @@
 			files = (
 				439BB192278225E90085F120 /* ChatRoomViewController.swift in Sources */,
 				439BB18E278225E90085F120 /* AppDelegate.swift in Sources */,
+				43FC9DF12782647900F4D6AD /* Api.swift in Sources */,
 				439BB190278225E90085F120 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,6 +409,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -443,6 +464,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

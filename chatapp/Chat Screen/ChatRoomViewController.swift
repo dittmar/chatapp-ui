@@ -15,6 +15,8 @@ final class ChatRoomViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    
+    title = "Chat App"
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
