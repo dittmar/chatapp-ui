@@ -18,8 +18,7 @@ final class ChatRoomViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
-    title = "Chat App"
+
     updateCurrentUserLabel()
   }
   

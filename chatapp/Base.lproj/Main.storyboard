@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="-1128" y="70"/>
         </scene>
-        <!--Chat Room View Controller-->
+        <!--Chat App-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ChatRoomViewController" customModule="chatapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Chat App" id="BYZ-38-t0r" customClass="ChatRoomViewController" customModule="chatapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -91,7 +91,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Zva-fu-Kfo" secondAttribute="bottom" id="w0Z-11-4u4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ZGc-IF-m9B"/>
+                    <navigationItem key="navigationItem" title="Chat App" id="ZGc-IF-m9B"/>
                     <connections>
                         <outlet property="currentUserLabel" destination="ChL-cX-xOd" id="Bnf-08-prz"/>
                         <segue destination="DAg-CE-L7d" kind="presentation" identifier="showLogin" id="cwk-Me-Y3I"/>
@@ -101,7 +101,7 @@
             </objects>
             <point key="canvasLocation" x="-288" y="70"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Change User-->
         <scene sceneID="fJX-9X-dFa">
             <objects>
                 <viewController id="DAg-CE-L7d" customClass="LoginViewController" customModule="chatapp" customModuleProvider="target" sceneMemberID="viewController">
@@ -109,8 +109,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explanation of what changing your user/logging in does" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLP-yl-gLg">
+                                <rect key="frame" x="20" y="75" width="374" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="FHX-Q6-qTX">
-                                <rect key="frame" x="20" y="190.5" width="374" height="227"/>
+                                <rect key="frame" x="20" y="196" width="374" height="210"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dj0-l7-cOO">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
@@ -122,33 +128,45 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJE-RV-lxr">
-                                        <rect key="frame" x="0.0" y="134" width="374" height="30"/>
-                                        <state key="normal" title="Log in"/>
-                                        <connections>
-                                            <action selector="login:" destination="DAg-CE-L7d" eventType="touchUpInside" id="nak-WB-ynL"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H1y-1A-grK">
-                                        <rect key="frame" x="0.0" y="197" width="374" height="30"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Create a new user"/>
-                                        <connections>
-                                            <action selector="createUser:" destination="DAg-CE-L7d" eventType="touchUpInside" id="smI-n0-uJZ"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ht3-iq-ORz">
+                                        <rect key="frame" x="0.0" y="134" width="374" height="76"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJE-RV-lxr">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="33"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="Log in"/>
+                                                <connections>
+                                                    <action selector="login:" destination="DAg-CE-L7d" eventType="touchUpInside" id="nak-WB-ynL"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H1y-1A-grK">
+                                                <rect key="frame" x="0.0" y="43" width="374" height="33"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Create a new user"/>
+                                                <connections>
+                                                    <action selector="createUser:" destination="DAg-CE-L7d" eventType="touchUpInside" id="smI-n0-uJZ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="X7i-SE-sUg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="FHX-Q6-qTX" firstAttribute="centerY" secondItem="X7i-SE-sUg" secondAttribute="centerY" constant="-100" id="KGT-Ma-BnW"/>
+                            <constraint firstItem="X7i-SE-sUg" firstAttribute="trailing" secondItem="dLP-yl-gLg" secondAttribute="trailing" constant="20" id="AT8-Lg-Aop"/>
+                            <constraint firstItem="FHX-Q6-qTX" firstAttribute="top" secondItem="dLP-yl-gLg" secondAttribute="bottom" constant="80" id="FME-BW-Hwh"/>
+                            <constraint firstItem="dLP-yl-gLg" firstAttribute="leading" secondItem="X7i-SE-sUg" secondAttribute="leading" constant="20" id="brH-mh-s1P"/>
+                            <constraint firstItem="dLP-yl-gLg" firstAttribute="top" secondItem="X7i-SE-sUg" secondAttribute="top" constant="75" id="dF1-Fx-ou0"/>
                             <constraint firstItem="X7i-SE-sUg" firstAttribute="trailing" secondItem="FHX-Q6-qTX" secondAttribute="trailing" constant="20" id="scS-MZ-NoT"/>
                             <constraint firstItem="FHX-Q6-qTX" firstAttribute="leading" secondItem="X7i-SE-sUg" secondAttribute="leading" constant="20" id="yxF-Hs-Fi1"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Change User" id="sVh-Jp-ywf"/>
                     <connections>
+                        <outlet property="headerLabel" destination="dLP-yl-gLg" id="X30-sp-Hji"/>
                         <outlet property="passwordTextField" destination="E8U-AL-60O" id="VdL-RS-DaR"/>
                         <outlet property="usernameTextField" destination="dj0-l7-cOO" id="EWk-aD-CBD"/>
                     </connections>

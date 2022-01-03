@@ -8,3 +8,4 @@
 
 "CurrentUserLabelFormat" = "Current user: %@";
 "NoUser" = "anonymous";
+"LoginScreenHeader" = "Log in to be able to send messages in the main room and send messages to friends.";

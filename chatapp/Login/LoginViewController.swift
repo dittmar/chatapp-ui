@@ -9,8 +9,15 @@
 import UIKit
 
 final class LoginViewController: UIViewController {
+  @IBOutlet private weak var headerLabel: UILabel!
   @IBOutlet private weak var usernameTextField: UITextField!
   @IBOutlet private weak var passwordTextField: UITextField!
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    headerLabel.text = NSLocalizedString("LoginScreenHeader", comment: "Log in to be able...")
+  }
   
   @IBAction private func login(_ sender: Any) {
     guard let username = usernameTextField.text else { return }
