@@ -8,29 +8,52 @@
 import Foundation
 
 protocol Endpoint {
+  associatedtype Response: Decodable
+  
   var httpBody: Data? { get throws }
   var httpMethod: HttpMethod { get }
   var path: String { get }
   
-  func invoke()
+  func invoke(onSuccess: ((Response) -> Void)?,
+              onError: ((ApiError) -> Void)?) throws
 }
 
 extension Endpoint {
-  var serverBase: String { "localhost:8000" }
+  var serverBase: String { "http://127.0.0.1:8000" }
   
-  func invoke() {
+  func invoke(onSuccess: ((Response) -> Void)? = nil, onError: ((ApiError) -> Void)? = nil) throws {
     guard let url = URL(string: path) else { fatalError("Path is not a valid URL") }
     
     var request = URLRequest(url: url)
-    request.httpBody = httpBody
+    request.httpBody = try httpBody
     request.httpMethod = httpMethod.rawValue
     
     let session = URLSession.shared
     let task = session.dataTask(with: request) { (data, response, error) in
-      // TODO (dittmar)
+      if let error = error {
+        // TODO (dittmar): get message for error
+        onError?(ApiError(code: (error as NSError).code, message: ""))
+        return
+      }
+      
+      guard let data = data else {
+        fatalError("No data when data expected")
+      }
+
+      do {
+        let responseData = try JSONDecoder().decode(Response.self, from: data)
+        onSuccess?(responseData)
+      } catch {
+        fatalError("Could not decode payload: \(String(data: data, encoding: .utf8) ?? "No data")")
+      }
     }
     task.resume()
   }
+}
+
+struct ApiError {
+  let code: Int
+  let message: String
 }
 
 enum HttpMethod: String {
@@ -41,6 +64,11 @@ enum HttpMethod: String {
 }
 
 enum UserEndpoint: Endpoint {
+  struct Response: Decodable {
+    let id: Int
+    let username: String
+  }
+  
   case login(username: String)
   
   var httpBody: Data? {
@@ -62,7 +90,21 @@ enum UserEndpoint: Endpoint {
   var path: String {
     switch self {
     case .login:
-      return "/users/login"
+      return "\(serverBase)/users/login"
     }
   }
 }
+
+/*
+enum MessageEndpoint: Endpoint {
+  struct Response: Decodable {
+    let message: String
+    let receiver: String?
+    let sender: String
+  }
+}
+
+enum NoContentEndpoint: Endpoint {
+  struct Response: Decodable {}
+}
+*/

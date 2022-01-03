@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		438214552782909700815F00 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438214542782909700815F00 /* LoginViewController.swift */; };
 		439BB18E278225E90085F120 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB18D278225E90085F120 /* AppDelegate.swift */; };
 		439BB190278225E90085F120 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB18F278225E90085F120 /* SceneDelegate.swift */; };
 		439BB192278225E90085F120 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB191278225E90085F120 /* ChatRoomViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		438214542782909700815F00 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		439BB18A278225E90085F120 /* chatapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		439BB18D278225E90085F120 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		439BB18F278225E90085F120 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		438214532782907200815F00 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				438214542782909700815F00 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		439BB181278225E90085F120 = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +114,7 @@
 				43FC9DEF2782646E00F4D6AD /* Api */,
 				439BB1C3278226CA0085F120 /* App */,
 				439BB1C2278226A20085F120 /* Chat Screen */,
+				438214532782907200815F00 /* Login */,
 				439BB196278225EA0085F120 /* Assets.xcassets */,
 				439BB198278225EA0085F120 /* LaunchScreen.storyboard */,
 				439BB19B278225EA0085F120 /* Info.plist */,
@@ -296,6 +307,7 @@
 				439BB192278225E90085F120 /* ChatRoomViewController.swift in Sources */,
 				439BB18E278225E90085F120 /* AppDelegate.swift in Sources */,
 				43FC9DF12782647900F4D6AD /* Api.swift in Sources */,
+				438214552782909700815F00 /* LoginViewController.swift in Sources */,
 				439BB190278225E90085F120 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
