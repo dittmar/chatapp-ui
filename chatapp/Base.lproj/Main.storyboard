@@ -33,6 +33,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current user:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ChL-cX-xOd">
+                                <rect key="frame" x="15" y="88" width="384" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zva-fu-Kfo">
                                 <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <items>
@@ -47,7 +53,7 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Bbe-T2-czQ"/>
-                                    <barButtonItem title="Log in" id="DUh-qw-gzm">
+                                    <barButtonItem title="Change User" id="DUh-qw-gzm">
                                         <connections>
                                             <action selector="didTapLogin:" destination="BYZ-38-t0r" id="rg0-9z-Z09"/>
                                         </connections>
@@ -63,7 +69,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VX2-iv-Idx">
-                                <rect key="frame" x="0.0" y="88" width="414" height="635"/>
+                                <rect key="frame" x="0.0" y="109" width="414" height="614"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -72,18 +78,22 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Zva-fu-Kfo" secondAttribute="trailing" id="18M-sC-JKk"/>
                             <constraint firstItem="Zva-fu-Kfo" firstAttribute="top" secondItem="v4O-S4-wfW" secondAttribute="bottom" constant="10" id="7Hc-fd-H2J"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ChL-cX-xOd" secondAttribute="trailing" constant="15" id="EN0-9m-Ha6"/>
+                            <constraint firstItem="ChL-cX-xOd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="PNy-aO-PhR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VX2-iv-Idx" secondAttribute="trailing" id="SfS-EZ-HRZ"/>
                             <constraint firstItem="Zva-fu-Kfo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="W4E-FC-Bls"/>
                             <constraint firstItem="VX2-iv-Idx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WXk-Rq-8Sp"/>
                             <constraint firstItem="v4O-S4-wfW" firstAttribute="top" secondItem="VX2-iv-Idx" secondAttribute="bottom" id="bMN-yy-35d"/>
                             <constraint firstItem="v4O-S4-wfW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="e5D-J4-Pgo"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="v4O-S4-wfW" secondAttribute="trailing" constant="10" id="hx3-YK-HN0"/>
-                            <constraint firstItem="VX2-iv-Idx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="tI2-IQ-exC"/>
+                            <constraint firstItem="ChL-cX-xOd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="j3e-ED-Ovu"/>
+                            <constraint firstItem="VX2-iv-Idx" firstAttribute="top" secondItem="ChL-cX-xOd" secondAttribute="bottom" id="rpT-pI-J5g"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Zva-fu-Kfo" secondAttribute="bottom" id="w0Z-11-4u4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ZGc-IF-m9B"/>
                     <connections>
+                        <outlet property="currentUserLabel" destination="ChL-cX-xOd" id="Bnf-08-prz"/>
                         <segue destination="DAg-CE-L7d" kind="presentation" identifier="showLogin" id="cwk-Me-Y3I"/>
                     </connections>
                 </viewController>
@@ -100,7 +110,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="FHX-Q6-qTX">
-                                <rect key="frame" x="20" y="222" width="374" height="164"/>
+                                <rect key="frame" x="20" y="190.5" width="374" height="227"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dj0-l7-cOO">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
@@ -117,6 +127,14 @@
                                         <state key="normal" title="Log in"/>
                                         <connections>
                                             <action selector="login:" destination="DAg-CE-L7d" eventType="touchUpInside" id="nak-WB-ynL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H1y-1A-grK">
+                                        <rect key="frame" x="0.0" y="197" width="374" height="30"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Create a new user"/>
+                                        <connections>
+                                            <action selector="createUser:" destination="DAg-CE-L7d" eventType="touchUpInside" id="smI-n0-uJZ"/>
                                         </connections>
                                     </button>
                                 </subviews>

@@ -31,8 +31,7 @@ extension Endpoint {
     let session = URLSession.shared
     let task = session.dataTask(with: request) { (data, response, error) in
       if let error = error {
-        // TODO (dittmar): get message for error
-        onError?(ApiError(code: (error as NSError).code, message: ""))
+        onError?(ApiError(code: (error as NSError).code, message: "something went wrong"))
         return
       }
       
@@ -41,10 +40,15 @@ extension Endpoint {
       }
 
       do {
+        // If it's a no-content response, we just have to call the completion handler
+        if self.self is NoContentEndpoint, data.count == 0 {
+          onSuccess?(NoContentEndpoint.Response() as! Self.Response)
+          return
+        }
         let responseData = try JSONDecoder().decode(Response.self, from: data)
         onSuccess?(responseData)
       } catch {
-        fatalError("Could not decode payload: \(String(data: data, encoding: .utf8) ?? "No data")")
+        onError?(ApiError(code: (error as NSError).code, message: String(data: data, encoding: .utf8) ?? "No data"))
       }
     }
     task.resume()
@@ -64,10 +68,7 @@ enum HttpMethod: String {
 }
 
 enum UserEndpoint: Endpoint {
-  struct Response: Decodable {
-    let id: Int
-    let username: String
-  }
+  typealias Response = User
   
   case login(username: String)
   
@@ -103,8 +104,34 @@ enum MessageEndpoint: Endpoint {
     let sender: String
   }
 }
+*/
 
 enum NoContentEndpoint: Endpoint {
   struct Response: Decodable {}
+  
+  case createUser(username: String)
+  
+  var httpBody: Data? {
+    get throws {
+      switch self {
+      case let .createUser(username):
+        return try JSONEncoder().encode(["username": username])
+      }
+    }
+  }
+  
+  var httpMethod: HttpMethod {
+    switch self {
+    case .createUser:
+      return .POST
+    }
+  }
+  
+  var path: String {
+    switch self {
+    case .createUser:
+      return "\(serverBase)/users/create"
+    }
+  }
 }
-*/
+
