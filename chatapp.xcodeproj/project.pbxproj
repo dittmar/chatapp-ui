@@ -20,6 +20,8 @@
 		439BB1A5278225EA0085F120 /* chatappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB1A4278225EA0085F120 /* chatappTests.swift */; };
 		439BB1B0278225EA0085F120 /* chatappUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB1AF278225EA0085F120 /* chatappUITests.swift */; };
 		43BACD62278244E300EE224D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43BACD60278244E300EE224D /* Main.storyboard */; };
+		43BCB58027841D2B00E6C87F /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BCB57E27841D2B00E6C87F /* MessageTableViewCell.swift */; };
+		43BCB58127841D2B00E6C87F /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43BCB57F27841D2B00E6C87F /* MessageTableViewCell.xib */; };
 		43FC9DF12782647900F4D6AD /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FC9DF02782647900F4D6AD /* Api.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +62,8 @@
 		439BB1AF278225EA0085F120 /* chatappUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatappUITests.swift; sourceTree = "<group>"; };
 		439BB1B1278225EA0085F120 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43BACD61278244E300EE224D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = chatapp/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
+		43BCB57E27841D2B00E6C87F /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		43BCB57F27841D2B00E6C87F /* MessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		43FC9DF02782647900F4D6AD /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,6 +158,8 @@
 			children = (
 				439BB191278225E90085F120 /* ChatRoomViewController.swift */,
 				43BACD60278244E300EE224D /* Main.storyboard */,
+				43BCB57E27841D2B00E6C87F /* MessageTableViewCell.swift */,
+				43BCB57F27841D2B00E6C87F /* MessageTableViewCell.xib */,
 			);
 			path = "Chat Screen";
 			sourceTree = "<group>";
@@ -291,6 +297,7 @@
 			files = (
 				43BACD62278244E300EE224D /* Main.storyboard in Resources */,
 				4382145D2782A67700815F00 /* Localizable.strings in Resources */,
+				43BCB58127841D2B00E6C87F /* MessageTableViewCell.xib in Resources */,
 				439BB19A278225EA0085F120 /* LaunchScreen.storyboard in Resources */,
 				439BB197278225EA0085F120 /* Assets.xcassets in Resources */,
 			);
@@ -319,6 +326,7 @@
 			files = (
 				4382145F2782A81300815F00 /* Notifications.swift in Sources */,
 				439BB192278225E90085F120 /* ChatRoomViewController.swift in Sources */,
+				43BCB58027841D2B00E6C87F /* MessageTableViewCell.swift in Sources */,
 				439BB18E278225E90085F120 /* AppDelegate.swift in Sources */,
 				43FC9DF12782647900F4D6AD /* Api.swift in Sources */,
 				438214592782992900815F00 /* LocalStorage.swift in Sources */,
