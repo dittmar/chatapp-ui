@@ -45,6 +45,14 @@ final class LoginViewController: UIViewController {
     }
   }
   
+  @IBAction func didTapReturnUserTextField(_ sender: Any) {
+    passwordTextField.becomeFirstResponder()
+  }
+  
+  @IBAction func didTapReturnPasswordTextField(_ sender: Any) {
+    login(sender)
+  }
+  
   private func logIn(username: String, password: String) {
     do {
       try UserEndpoint.login(username: username, password: password).invoke(onSuccess: { response in
