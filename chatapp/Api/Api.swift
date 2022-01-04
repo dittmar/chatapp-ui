@@ -70,13 +70,13 @@ enum HttpMethod: String {
 enum UserEndpoint: Endpoint {
   typealias Response = User
   
-  case login(username: String)
+  case login(username: String, password: String)
   
   var httpBody: Data? {
     get throws {
       switch self {
-      case let .login(username):
-        return try JSONEncoder().encode(["username": username])
+      case let .login(username, password):
+        return try JSONEncoder().encode(["username": username, "password": password])
       }
     }
   }
@@ -109,13 +109,13 @@ enum MessageEndpoint: Endpoint {
 enum NoContentEndpoint: Endpoint {
   struct Response: Decodable {}
   
-  case createUser(username: String)
+  case createUser(username: String, password: String)
   
   var httpBody: Data? {
     get throws {
       switch self {
-      case let .createUser(username):
-        return try JSONEncoder().encode(["username": username])
+      case let .createUser(username, password):
+        return try JSONEncoder().encode(["username": username, "password": password])
       }
     }
   }

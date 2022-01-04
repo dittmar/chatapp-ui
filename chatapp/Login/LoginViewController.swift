@@ -20,18 +20,20 @@ final class LoginViewController: UIViewController {
   }
   
   @IBAction private func login(_ sender: Any) {
-    guard let username = usernameTextField.text else { return }
+    guard let username = usernameTextField.text,
+          let password = passwordTextField.text else { return }
     
-    logIn(username: username)
+    logIn(username: username, password: password)
   }
   
   @IBAction private func createUser(_ sender: Any) {
-    guard let username = usernameTextField.text else { return }
+    guard let username = usernameTextField.text,
+          let password = passwordTextField.text else { return }
     
     do {
-      try NoContentEndpoint.createUser(username: username).invoke(onSuccess: { response in        
+      try NoContentEndpoint.createUser(username: username, password: password).invoke(onSuccess: { response in
         DispatchQueue.main.async { [weak self] in
-          self?.logIn(username: username)
+          self?.logIn(username: username, password: password)
         }
       }, onError: { error in
         DispatchQueue.main.async { [weak self] in
@@ -43,9 +45,9 @@ final class LoginViewController: UIViewController {
     }
   }
   
-  private func logIn(username: String) {
+  private func logIn(username: String, password: String) {
     do {
-      try UserEndpoint.login(username: username).invoke(onSuccess: { response in
+      try UserEndpoint.login(username: username, password: password).invoke(onSuccess: { response in
         // This isn't a secure way of identifying a user.  We should be storing
         // data in the keychain instead of local storage, and we should be using something
         // like OAuth 2.0 for managing auth with an access token/refresh token pair to
