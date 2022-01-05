@@ -17,3 +17,4 @@
 "AddFriendAlertTitle" = "Add a new friend?";
 "AddFriendAlertMessage" = "Enter the username of the friend you would like to add.";
 "AddFriendAlertButtonTitle" = "Add friend";
+"AddFriendAlertCancelTitle" = "Cancel";

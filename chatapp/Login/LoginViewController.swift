@@ -10,6 +10,14 @@ import UIKit
 
 final class LoginViewController: UIViewController {
   @IBOutlet private weak var headerLabel: UILabel!
+  
+  @IBOutlet private var mainView: UIView!{
+    didSet {
+      let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboardIfNecessary))
+      mainView.addGestureRecognizer(tapGestureRecognizer)
+    }
+  }
+  
   @IBOutlet private weak var usernameTextField: UITextField!
   @IBOutlet private weak var passwordTextField: UITextField!
   
@@ -49,6 +57,10 @@ final class LoginViewController: UIViewController {
   
   @IBAction func didTapReturnPasswordTextField(_ sender: Any) {
     login(sender)
+  }
+  
+  @objc private func dismissKeyboardIfNecessary() {
+    view.endEditing(true)
   }
   
   private func logIn(username: String, password: String) {

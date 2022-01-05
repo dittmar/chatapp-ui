@@ -81,7 +81,7 @@ final class ChatRoomViewController: UIViewController {
     }
     
     do {
-      try viewModel.sendMessage(message: message)
+      try viewModel.sendMessage(receiverId: viewModel.selectedFriendId, message: message)
     } catch {
       // TODO (dittmar): handle error
     }
@@ -107,7 +107,7 @@ final class ChatRoomViewController: UIViewController {
   
   @objc private func didUpdateUser() {
     do {
-      try viewModel.refreshMessages()
+      try viewModel.reset()
     } catch {
       // TODO (dittmar): handle error
     }
@@ -139,6 +139,11 @@ final class ChatRoomViewController: UIViewController {
 
 extension ChatRoomViewController: ChatRoomViewModelDelegate {
   func didSendMessage() {
+    DispatchQueue.main.async { [weak self] in
+      self?.messageTextField.text = nil
+      self?.scrollToBottom()
+    }
+    
     do {
       try viewModel.refreshMessages()
     } catch {
@@ -188,6 +193,10 @@ extension ChatRoomViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MessageTableViewCell.self)) as? MessageTableViewCell else {
       fatalError("Could not dequeue expected cell")
+    }
+    
+    if indexPath.row > viewModel.messages.count {
+      return cell
     }
     cell.setUp(message: viewModel.messages[indexPath.row])
     return cell

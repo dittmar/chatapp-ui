@@ -39,7 +39,7 @@ final class FriendsListViewController: UIViewController {
       textField.placeholder = "username"
     }
     
-    let alertAction = UIAlertAction(title: NSLocalizedString("AddFriendAlertButtonTitle", comment: "Add friend"), style: .default) { [weak self] _ in
+    let addFriendAction = UIAlertAction(title: NSLocalizedString("AddFriendAlertButtonTitle", comment: "Add friend"), style: .default) { [weak self] _ in
       guard let friendName = alert.textFields?[0].text else { return }
       do {
         try self?.friendsListViewModel.addFriend(friendName: friendName)
@@ -47,7 +47,10 @@ final class FriendsListViewController: UIViewController {
         // TODO (dittmar): handle error
       }
     }
-    alert.addAction(alertAction)
+    alert.addAction(addFriendAction)
+    
+    let cancelAction = UIAlertAction(title: NSLocalizedString("AddFriendAlertCancelTitle", comment: "Cancel"), style: .cancel, handler: nil)
+    alert.addAction(cancelAction)
     
     present(alert, animated: true, completion: nil)
   }
@@ -111,5 +114,6 @@ extension FriendsListViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     delegate?.didTapFriend(friendId: friends[indexPath.row].friendId)
+    dismiss(animated: true, completion: nil)
   }
 }

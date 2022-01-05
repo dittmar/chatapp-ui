@@ -22,6 +22,7 @@ class ChatRoomViewModel {
   }
   
   private weak var delegate: ChatRoomViewModelDelegate?
+  private(set) var selectedFriendId: Int?
   private var selectedRoomType = RoomType.global
   
   var currentUsername: String {
@@ -38,6 +39,7 @@ class ChatRoomViewModel {
     try MessageEndpoint.listMessagesDirect(senderId: senderId, receiverId: receiverId).invoke(onSuccess: { [weak self] response in
       self?.updateMessages(response)
       self?.selectedRoomType = .direct
+      self?.selectedFriendId = receiverId
     }, onError: { [weak self] error in
       self?.delegate?.shouldShowError(error)
     })
@@ -47,15 +49,28 @@ class ChatRoomViewModel {
     try MessageEndpoint.listMessagesGlobal.invoke(onSuccess: { [weak self] response in
       self?.updateMessages(response)
       self?.selectedRoomType = .global
+      self?.selectedFriendId = nil
     }, onError: { [weak self] error in
       self?.delegate?.shouldShowError(error)
     })
   }
   
   func refreshMessages() throws {
-    if selectedRoomType == .global {
+    switch selectedRoomType {
+    case .direct:
+      guard let senderId = LocalStorage.user?.id,
+            let receiverId = selectedFriendId else { return }
+      
+      try loadDirectMessages(senderId: senderId, receiverId: receiverId)
+    case .global:
       try loadGlobalMessages()
     }
+  }
+  
+  func reset() throws {
+    selectedRoomType = .global
+    selectedFriendId = nil
+    try refreshMessages()
   }
   
   func sendMessage(receiverId: Int? = nil, message: String) throws {

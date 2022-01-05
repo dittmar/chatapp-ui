@@ -250,6 +250,7 @@
                     <navigationItem key="navigationItem" title="Change User" id="sVh-Jp-ywf"/>
                     <connections>
                         <outlet property="headerLabel" destination="dLP-yl-gLg" id="X30-sp-Hji"/>
+                        <outlet property="mainView" destination="4xx-qN-Q21" id="cel-9m-tfk"/>
                         <outlet property="passwordTextField" destination="E8U-AL-60O" id="VdL-RS-DaR"/>
                         <outlet property="usernameTextField" destination="dj0-l7-cOO" id="EWk-aD-CBD"/>
                     </connections>
