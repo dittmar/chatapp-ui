@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -101,11 +102,67 @@
                         <outlet property="messageTextField" destination="v4O-S4-wfW" id="qaw-uH-b4P"/>
                         <outlet property="messageTextFieldBottomConstraint" destination="7Hc-fd-H2J" id="Rfg-CC-xlh"/>
                         <segue destination="DAg-CE-L7d" kind="presentation" identifier="showLogin" id="cwk-Me-Y3I"/>
+                        <segue destination="bL1-J7-qmc" kind="presentation" identifier="showFriendsList" id="r9l-kl-ZoA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-288" y="70"/>
+        </scene>
+        <!--Friends List View Controller-->
+        <scene sceneID="1nO-aw-pG0">
+            <objects>
+                <viewController id="bL1-J7-qmc" customClass="FriendsListViewController" customModule="chatapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pie-O4-qgX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="y29-dx-BP5">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="737"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HXE-PZ-xfz">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vMB-t1-TrN">
+                                <rect key="frame" x="20" y="757" width="374" height="31"/>
+                                <color key="backgroundColor" name="AccentColor"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Add Friend"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tappedAddFriend:" destination="bL1-J7-qmc" eventType="touchUpInside" id="zqD-XV-KqM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="MxP-Fs-0YO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vMB-t1-TrN" firstAttribute="top" secondItem="y29-dx-BP5" secondAttribute="bottom" constant="20" id="AOg-Cc-l1X"/>
+                            <constraint firstItem="MxP-Fs-0YO" firstAttribute="trailing" secondItem="y29-dx-BP5" secondAttribute="trailing" id="NyZ-ab-Ouo"/>
+                            <constraint firstItem="MxP-Fs-0YO" firstAttribute="trailing" secondItem="vMB-t1-TrN" secondAttribute="trailing" constant="20" id="R3T-uD-Op6"/>
+                            <constraint firstItem="vMB-t1-TrN" firstAttribute="leading" secondItem="MxP-Fs-0YO" secondAttribute="leading" constant="20" id="eac-F2-51d"/>
+                            <constraint firstItem="MxP-Fs-0YO" firstAttribute="bottom" secondItem="vMB-t1-TrN" secondAttribute="bottom" constant="20" id="kJf-a7-VEN"/>
+                            <constraint firstItem="y29-dx-BP5" firstAttribute="top" secondItem="MxP-Fs-0YO" secondAttribute="top" id="q0p-Er-Hwk"/>
+                            <constraint firstItem="y29-dx-BP5" firstAttribute="leading" secondItem="MxP-Fs-0YO" secondAttribute="leading" id="yU7-H2-D26"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="friendsTableView" destination="y29-dx-BP5" id="5dT-lF-pQq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qdr-hu-TVS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-288" y="784"/>
         </scene>
         <!--Change User-->
         <scene sceneID="fJX-9X-dFa">
@@ -122,7 +179,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="FHX-Q6-qTX">
-                                <rect key="frame" x="20" y="196" width="374" height="210"/>
+                                <rect key="frame" x="20" y="196" width="374" height="230"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dj0-l7-cOO">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
@@ -140,22 +197,36 @@
                                             <action selector="didTapReturnPasswordTextField:" destination="DAg-CE-L7d" eventType="primaryActionTriggered" id="sSW-pz-jch"/>
                                         </connections>
                                     </textField>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ht3-iq-ORz">
-                                        <rect key="frame" x="0.0" y="134" width="374" height="76"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Ht3-iq-ORz">
+                                        <rect key="frame" x="0.0" y="134" width="374" height="96"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJE-RV-lxr">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="33"/>
+                                                <color key="backgroundColor" name="AccentColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Log in"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="login:" destination="DAg-CE-L7d" eventType="touchUpInside" id="nak-WB-ynL"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H1y-1A-grK">
-                                                <rect key="frame" x="0.0" y="43" width="374" height="33"/>
+                                                <rect key="frame" x="0.0" y="63" width="374" height="33"/>
+                                                <color key="backgroundColor" name="AccentColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Create a new user"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="createUser:" destination="DAg-CE-L7d" eventType="touchUpInside" id="smI-n0-uJZ"/>
                                                 </connections>
@@ -189,6 +260,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

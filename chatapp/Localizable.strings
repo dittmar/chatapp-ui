@@ -6,6 +6,14 @@
   
 */
 
+// Chat room screen
 "CurrentUserLabelFormat" = "Current user: %@";
 "NoUser" = "anonymous";
+
+// Login screen
 "LoginScreenHeader" = "Log in to be able to send messages in the main room and send messages to friends.";
+
+// Friends list screen
+"AddFriendAlertTitle" = "Add a new friend?";
+"AddFriendAlertMessage" = "Enter the username of the friend you would like to add.";
+"AddFriendAlertButtonTitle" = "Add friend";

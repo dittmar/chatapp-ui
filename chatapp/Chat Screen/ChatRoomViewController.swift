@@ -42,7 +42,10 @@ final class ChatRoomViewController: UIViewController {
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    
+    if segue.identifier == "showFriendsList",
+       let friendsListViewController = segue.destination as? FriendsListViewController {
+      friendsListViewController.delegate = self
+    }
   }
   
   @IBAction private func didTapMainRoom(_ sender: Any) {
@@ -55,11 +58,11 @@ final class ChatRoomViewController: UIViewController {
   
   
   @IBAction private func didTapFriends(_ sender: Any) {
-    guard let senderId = LocalStorage.user?.id else { return }
-    do {
-      try viewModel.loadDirectMessages(senderId: senderId, receiverId: 0)
-    } catch {
-      // TODO (dittmar): handle error
+    // Redirect to login screen if you tap friends without being logged in
+    if LocalStorage.user == nil {
+      didTapLogin(self)
+    } else {
+      performSegue(withIdentifier: "showFriendsList", sender: nil)
     }
   }
   
@@ -70,6 +73,12 @@ final class ChatRoomViewController: UIViewController {
   
   @IBAction func sendMessage(_ sender: Any) {
     guard let message = messageTextField.text else { return }
+    
+    // If we don't have a user, divert them to the login
+    if LocalStorage.user == nil {
+      didTapLogin(self)
+      return
+    }
     
     do {
       try viewModel.sendMessage(message: message)
@@ -155,6 +164,17 @@ extension ChatRoomViewController: ChatRoomViewModelDelegate {
   
   func shouldShowError(_ error: ApiError) {
     showErrorAlert(apiError: error)
+  }
+}
+
+extension ChatRoomViewController: FriendsListViewControllerDelegate {
+  func didTapFriend(friendId: Int) {
+    guard let senderId = LocalStorage.user?.id else { return }
+    do {
+      try viewModel.loadDirectMessages(senderId: senderId, receiverId: friendId)
+    } catch {
+      // TODO (dittmar): handle error
+    }
   }
 }
 

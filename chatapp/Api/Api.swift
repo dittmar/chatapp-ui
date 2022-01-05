@@ -67,31 +67,48 @@ enum HttpMethod: String {
   case PUT
 }
 
-enum UserEndpoint: Endpoint {
-  typealias Response = User
+enum FriendEndpoint: Endpoint {
+  typealias Response = Friend
   
-  case login(username: String, password: String)
+  case addFriend(userId: Int, friendName: String)
   
   var httpBody: Data? {
     get throws {
       switch self {
-      case let .login(username, password):
-        return try JSONEncoder().encode(["username": username, "password": password])
+      case let .addFriend(userId, friendName):
+        return try JSONEncoder().encode(AddFriendParam(userId: userId, friendName: friendName))
       }
     }
   }
   
   var httpMethod: HttpMethod {
     switch self {
-    case .login:
+    case .addFriend:
       return .POST
     }
   }
   
   var path: String {
     switch self {
-    case .login:
-      return "\(serverBase)/users/login"
+    case .addFriend:
+      return "\(serverBase)/friends/add"
+    }
+  }
+}
+
+enum FriendsEndpoint: Endpoint {
+  typealias Response = [Friend]
+  
+  case listFriends(userId: Int)
+  
+  var httpBody: Data? { nil }
+  
+  var httpMethod: HttpMethod { .GET }
+  
+  var path: String {
+    switch self {
+    case let .listFriends(userId):
+      return "\(serverBase)/friends/list/\(userId)"
     }
   }
 }
@@ -131,12 +148,15 @@ enum MessageEndpoint: Endpoint {
 enum NoContentEndpoint: Endpoint {
   struct Response: Decodable {}
   
+  case deleteFriend(userId: Int, friendId: Int)
   case createUser(username: String, password: String)
   case sendMessage(senderId: Int, receiverId: Int? = nil, message: String)
   
   var httpBody: Data? {
     get throws {
       switch self {
+      case let .deleteFriend(userId, friendId):
+        return try JSONEncoder().encode(["userId": userId, "friendId": friendId])
       case let .createUser(username, password):
         return try JSONEncoder().encode(["username": username, "password": password])
       case let .sendMessage(senderId, receiverId, message):
@@ -150,6 +170,8 @@ enum NoContentEndpoint: Endpoint {
     switch self {
     case .createUser, .sendMessage:
       return .POST
+    case .deleteFriend:
+      return .DELETE
     }
   }
   
@@ -157,9 +179,39 @@ enum NoContentEndpoint: Endpoint {
     switch self {
     case .createUser:
       return "\(serverBase)/users/create"
+    case .deleteFriend:
+      return "\(serverBase)/friends/delete"
     case .sendMessage:
       return "\(serverBase)/messages/send"
     }
   }
 }
 
+enum UserEndpoint: Endpoint {
+  typealias Response = User
+  
+  case login(username: String, password: String)
+  
+  var httpBody: Data? {
+    get throws {
+      switch self {
+      case let .login(username, password):
+        return try JSONEncoder().encode(["username": username, "password": password])
+      }
+    }
+  }
+  
+  var httpMethod: HttpMethod {
+    switch self {
+    case .login:
+      return .POST
+    }
+  }
+  
+  var path: String {
+    switch self {
+    case .login:
+      return "\(serverBase)/users/login"
+    }
+  }
+}
