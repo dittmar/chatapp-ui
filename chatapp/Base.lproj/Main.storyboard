@@ -67,6 +67,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="sendMessage:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="Xe0-Az-Thq"/>
+                                </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VX2-iv-Idx">
                                 <rect key="frame" x="0.0" y="109" width="414" height="614"/>
@@ -95,6 +98,7 @@
                     <connections>
                         <outlet property="currentUserLabel" destination="ChL-cX-xOd" id="Bnf-08-prz"/>
                         <outlet property="messageTableView" destination="VX2-iv-Idx" id="uqq-Sn-VU7"/>
+                        <outlet property="messageTextField" destination="v4O-S4-wfW" id="qaw-uH-b4P"/>
                         <segue destination="DAg-CE-L7d" kind="presentation" identifier="showLogin" id="cwk-Me-Y3I"/>
                     </connections>
                 </viewController>

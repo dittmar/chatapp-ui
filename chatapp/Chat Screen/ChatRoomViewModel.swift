@@ -10,6 +10,7 @@ import UIKit
 
 protocol ChatRoomViewModelDelegate: AnyObject {
   func didLoadMessages()
+  func shouldShowLogin()
   func shouldShowError(_ error: ApiError)
 }
 
@@ -39,6 +40,17 @@ class ChatRoomViewModel {
       self?.updateMessages(response)
     }, onError: { [weak self] error in
       self?.delegate?.shouldShowError(error)
+    })
+  }
+  
+  func sendMessage(receiverId: Int? = nil, message: String) throws {
+    guard let senderId = LocalStorage.user?.id else {
+      delegate?.shouldShowLogin()
+      return
+    }
+    
+    try NoContentEndpoint.sendMessage(senderId: senderId, receiverId: receiverId, message: message).invoke(onError: { error in
+      // TODO (dittmar): handle error
     })
   }
   

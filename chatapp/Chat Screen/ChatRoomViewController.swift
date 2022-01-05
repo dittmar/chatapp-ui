@@ -12,13 +12,18 @@ final class ChatRoomViewController: UIViewController {
   
   @IBOutlet private weak var currentUserLabel: UILabel!
   @IBOutlet private weak var messageTableView: UITableView!
+  @IBOutlet private weak var messageTextField: UITextField!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     registerNotifications()
     setUpMessageTable()
-    try! viewModel.loadGlobalMessages()
+    do {
+      try viewModel.loadGlobalMessages()
+    } catch {
+      // TODO (dittmar): handle error
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -32,7 +37,11 @@ final class ChatRoomViewController: UIViewController {
   }
   
   @IBAction private func didTapMainRoom(_ sender: Any) {
-    try! viewModel.loadGlobalMessages()
+    do {
+      try viewModel.loadGlobalMessages()
+    } catch {
+      // TODO (dittmar): handle error
+    }
   }
   
   
@@ -43,6 +52,16 @@ final class ChatRoomViewController: UIViewController {
   
   @IBAction private func didTapLogin(_ sender: Any) {
     performSegue(withIdentifier: "showLogin", sender: nil)
+  }
+  
+  @IBAction func sendMessage(_ sender: Any) {
+    guard let message = messageTextField.text else { return }
+    
+    do {
+      try viewModel.sendMessage(message: message)
+    } catch {
+      // TODO (dittmar): handle error
+    }
   }
   
   private func registerNotifications() {
@@ -65,6 +84,14 @@ final class ChatRoomViewController: UIViewController {
 }
 
 extension ChatRoomViewController: ChatRoomViewModelDelegate {
+  func shouldShowLogin() {
+    DispatchQueue.main.async { [weak self] in
+      guard let self = self else { return }
+      
+      self.didTapLogin(self)
+    }
+  }
+  
   func didLoadMessages() {
     DispatchQueue.main.async { [weak self] in
       self?.messageTableView.reloadData()
@@ -76,9 +103,7 @@ extension ChatRoomViewController: ChatRoomViewModelDelegate {
   }
 }
 
-extension ChatRoomViewController: UITableViewDelegate {
-  
-}
+extension ChatRoomViewController: UITableViewDelegate {}
 
 extension ChatRoomViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

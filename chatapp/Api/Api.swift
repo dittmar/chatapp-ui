@@ -132,19 +132,23 @@ enum NoContentEndpoint: Endpoint {
   struct Response: Decodable {}
   
   case createUser(username: String, password: String)
+  case sendMessage(senderId: Int, receiverId: Int? = nil, message: String)
   
   var httpBody: Data? {
     get throws {
       switch self {
       case let .createUser(username, password):
         return try JSONEncoder().encode(["username": username, "password": password])
+      case let .sendMessage(senderId, receiverId, message):
+        let messageParam = MessageParam(message: message, receiverId: receiverId, senderId: senderId)
+        return try JSONEncoder().encode(messageParam)
       }
     }
   }
   
   var httpMethod: HttpMethod {
     switch self {
-    case .createUser:
+    case .createUser, .sendMessage:
       return .POST
     }
   }
@@ -153,6 +157,8 @@ enum NoContentEndpoint: Endpoint {
     switch self {
     case .createUser:
       return "\(serverBase)/users/create"
+    case .sendMessage:
+      return "\(serverBase)/messages/send"
     }
   }
 }
