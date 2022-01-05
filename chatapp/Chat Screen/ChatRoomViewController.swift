@@ -8,11 +8,20 @@
 import UIKit
 
 final class ChatRoomViewController: UIViewController {
+  private let messageTextFieldBottomPadding: CGFloat = 10.0
   private lazy var viewModel = ChatRoomViewModel(delegate: self)
   
   @IBOutlet private weak var currentUserLabel: UILabel!
-  @IBOutlet private weak var messageTableView: UITableView!
+  @IBOutlet private weak var messageTableView: UITableView! {
+    didSet {
+      let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboardIfNecessary))
+      messageTableView.addGestureRecognizer(tapGestureRecognizer)
+    }
+  }
+  
   @IBOutlet private weak var messageTextField: UITextField!
+  
+  @IBOutlet private weak var messageTextFieldBottomConstraint: NSLayoutConstraint!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -66,6 +75,28 @@ final class ChatRoomViewController: UIViewController {
   
   private func registerNotifications() {
     NotificationCenter.default.addObserver(self, selector: #selector(updateCurrentUserLabel), name: Notification.didUpdateUser.name, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(didShowKeyboard(_:)), name: UIApplication.keyboardWillChangeFrameNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(didHideKeyboard), name: UIApplication.keyboardWillHideNotification, object: nil)
+  }
+  
+  @objc private func didHideKeyboard() {
+    messageTextFieldBottomConstraint.constant = messageTextFieldBottomPadding
+  }
+  
+  @objc private func didShowKeyboard(_ notification: NSNotification) {
+    guard let userInfo = notification.userInfo,
+          let keyboardHeight = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.height else { return }
+    
+    messageTextFieldBottomConstraint.constant = keyboardHeight + messageTextFieldBottomPadding
+    scrollToBottom()
+  }
+  
+  @objc private func dismissKeyboardIfNecessary() {
+    view.endEditing(true)
+  }
+  
+  private func scrollToBottom() {
+    messageTableView.setContentOffset(CGPoint(x: 0, y: self.messageTableView.contentSize.height), animated: true)
   }
   
   private func setUpMessageTable() {
@@ -104,7 +135,7 @@ extension ChatRoomViewController: ChatRoomViewModelDelegate {
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }
       self.messageTableView.reloadData()
-      self.messageTableView.setContentOffset(CGPoint(x: 0, y: self.messageTableView.contentSize.height), animated: true)
+      self.scrollToBottom()
     }
   }
   

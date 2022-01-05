@@ -99,6 +99,7 @@
                         <outlet property="currentUserLabel" destination="ChL-cX-xOd" id="Bnf-08-prz"/>
                         <outlet property="messageTableView" destination="VX2-iv-Idx" id="uqq-Sn-VU7"/>
                         <outlet property="messageTextField" destination="v4O-S4-wfW" id="qaw-uH-b4P"/>
+                        <outlet property="messageTextFieldBottomConstraint" destination="7Hc-fd-H2J" id="Rfg-CC-xlh"/>
                         <segue destination="DAg-CE-L7d" kind="presentation" identifier="showLogin" id="cwk-Me-Y3I"/>
                     </connections>
                 </viewController>
