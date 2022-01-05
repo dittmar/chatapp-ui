@@ -35,10 +35,8 @@ final class LoginViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
           self?.logIn(username: username, password: password)
         }
-      }, onError: { error in
-        DispatchQueue.main.async { [weak self] in
-          self?.showErrorAlert(error)
-        }
+      }, onError: { [weak self] error in
+        self?.showErrorAlert(apiError: error)
       })
     } catch {
       fatalError("Caught an unexpected error")
@@ -64,21 +62,11 @@ final class LoginViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
           self?.dismiss(animated: true, completion: nil)
         }
-      }, onError: { error in
-        DispatchQueue.main.async { [weak self] in
-          self?.showErrorAlert(error)
-        }
+      }, onError: { [weak self] error in
+        self?.showErrorAlert(apiError: error)
       })
     } catch {
       fatalError("Caught an unexpected error")
     }
-  }
-  
-  private func showErrorAlert(_ apiError: ApiError) {
-    let alert = UIAlertController(title: "Error", message: apiError.message, preferredStyle: .alert)
-    let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-    alert.addAction(alertAction)
-    
-    present(alert, animated: true, completion: nil)
   }
 }

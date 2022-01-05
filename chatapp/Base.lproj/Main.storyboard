@@ -94,6 +94,7 @@
                     <navigationItem key="navigationItem" title="Chat App" id="ZGc-IF-m9B"/>
                     <connections>
                         <outlet property="currentUserLabel" destination="ChL-cX-xOd" id="Bnf-08-prz"/>
+                        <outlet property="messageTableView" destination="VX2-iv-Idx" id="uqq-Sn-VU7"/>
                         <segue destination="DAg-CE-L7d" kind="presentation" identifier="showLogin" id="cwk-Me-Y3I"/>
                     </connections>
                 </viewController>

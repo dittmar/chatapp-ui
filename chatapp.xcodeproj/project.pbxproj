@@ -19,6 +19,9 @@
 		439BB19A278225EA0085F120 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439BB198278225EA0085F120 /* LaunchScreen.storyboard */; };
 		439BB1A5278225EA0085F120 /* chatappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB1A4278225EA0085F120 /* chatappTests.swift */; };
 		439BB1B0278225EA0085F120 /* chatappUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB1AF278225EA0085F120 /* chatappUITests.swift */; };
+		43B1800B27853045001571A9 /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B1800A27853045001571A9 /* ChatRoomViewModel.swift */; };
+		43B1800D27853200001571A9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B1800C27853200001571A9 /* Message.swift */; };
+		43B18010278550EC001571A9 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B1800F278550EC001571A9 /* UIViewController+Alert.swift */; };
 		43BACD62278244E300EE224D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43BACD60278244E300EE224D /* Main.storyboard */; };
 		43BCB58027841D2B00E6C87F /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BCB57E27841D2B00E6C87F /* MessageTableViewCell.swift */; };
 		43BCB58127841D2B00E6C87F /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43BCB57F27841D2B00E6C87F /* MessageTableViewCell.xib */; };
@@ -61,6 +64,9 @@
 		439BB1AB278225EA0085F120 /* chatappUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = chatappUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		439BB1AF278225EA0085F120 /* chatappUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatappUITests.swift; sourceTree = "<group>"; };
 		439BB1B1278225EA0085F120 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43B1800A27853045001571A9 /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
+		43B1800C27853200001571A9 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		43B1800F278550EC001571A9 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		43BACD61278244E300EE224D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = chatapp/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		43BCB57E27841D2B00E6C87F /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		43BCB57F27841D2B00E6C87F /* MessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
@@ -123,6 +129,7 @@
 		439BB18C278225E90085F120 /* chatapp */ = {
 			isa = PBXGroup;
 			children = (
+				43B1800E278550DD001571A9 /* Extensions */,
 				43FC9DEF2782646E00F4D6AD /* Api */,
 				439BB1C3278226CA0085F120 /* App */,
 				439BB1C2278226A20085F120 /* Chat Screen */,
@@ -160,6 +167,7 @@
 				43BACD60278244E300EE224D /* Main.storyboard */,
 				43BCB57E27841D2B00E6C87F /* MessageTableViewCell.swift */,
 				43BCB57F27841D2B00E6C87F /* MessageTableViewCell.xib */,
+				43B1800A27853045001571A9 /* ChatRoomViewModel.swift */,
 			);
 			path = "Chat Screen";
 			sourceTree = "<group>";
@@ -175,6 +183,14 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		43B1800E278550DD001571A9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				43B1800F278550EC001571A9 /* UIViewController+Alert.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		43FC9DEF2782646E00F4D6AD /* Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +203,7 @@
 		43FC9DF52782678E00F4D6AD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				43B1800C27853200001571A9 /* Message.swift */,
 				4382145A2782A3ED00815F00 /* User.swift */,
 			);
 			path = Models;
@@ -327,8 +344,11 @@
 				4382145F2782A81300815F00 /* Notifications.swift in Sources */,
 				439BB192278225E90085F120 /* ChatRoomViewController.swift in Sources */,
 				43BCB58027841D2B00E6C87F /* MessageTableViewCell.swift in Sources */,
+				43B18010278550EC001571A9 /* UIViewController+Alert.swift in Sources */,
+				43B1800B27853045001571A9 /* ChatRoomViewModel.swift in Sources */,
 				439BB18E278225E90085F120 /* AppDelegate.swift in Sources */,
 				43FC9DF12782647900F4D6AD /* Api.swift in Sources */,
+				43B1800D27853200001571A9 /* Message.swift in Sources */,
 				438214592782992900815F00 /* LocalStorage.swift in Sources */,
 				438214552782909700815F00 /* LoginViewController.swift in Sources */,
 				439BB190278225E90085F120 /* SceneDelegate.swift in Sources */,

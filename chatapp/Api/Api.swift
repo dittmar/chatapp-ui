@@ -96,15 +96,37 @@ enum UserEndpoint: Endpoint {
   }
 }
 
-/*
 enum MessageEndpoint: Endpoint {
-  struct Response: Decodable {
-    let message: String
-    let receiver: String?
-    let sender: String
+  typealias Response = [Message]
+  
+  case listMessagesGlobal
+  case listMessagesDirect(senderId: Int, receiverId: Int)
+  
+  var httpBody: Data? {
+    get throws {
+      switch self {
+      case .listMessagesGlobal:
+        return nil
+      case let .listMessagesDirect(senderId, receiverId):
+        return try JSONEncoder().encode(["senderId": senderId, "receiverId": receiverId])
+      }
+    }
+  }
+  
+  var httpMethod: HttpMethod {
+    switch self {
+    case .listMessagesGlobal, .listMessagesDirect:
+      return .POST
+    }
+  }
+  
+  var path: String {
+    switch self {
+    case .listMessagesGlobal, .listMessagesDirect:
+      return "\(serverBase)/messages/list"
+    }
   }
 }
-*/
 
 enum NoContentEndpoint: Endpoint {
   struct Response: Decodable {}

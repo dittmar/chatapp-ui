@@ -43,7 +43,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="messageLabel" destination="2g6-fK-tm6" id="y8l-7m-AOb"/>
-                <outlet property="usernameLabel" destination="9qI-PL-Su3" id="J5c-qz-T0t"/>
+                <outlet property="senderLabel" destination="9qI-PL-Su3" id="J5c-qz-T0t"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="98.4375"/>
         </tableViewCell>
