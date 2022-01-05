@@ -55,7 +55,12 @@ final class ChatRoomViewController: UIViewController {
   
   
   @IBAction private func didTapFriends(_ sender: Any) {
-  
+    guard let senderId = LocalStorage.user?.id else { return }
+    do {
+      try viewModel.loadDirectMessages(senderId: senderId, receiverId: 0)
+    } catch {
+      // TODO (dittmar): handle error
+    }
   }
   
   
@@ -74,7 +79,7 @@ final class ChatRoomViewController: UIViewController {
   }
   
   private func registerNotifications() {
-    NotificationCenter.default.addObserver(self, selector: #selector(updateCurrentUserLabel), name: Notification.didUpdateUser.name, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(didUpdateUser), name: Notification.didUpdateUser.name, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(didShowKeyboard(_:)), name: UIApplication.keyboardWillChangeFrameNotification, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(didHideKeyboard), name: UIApplication.keyboardWillHideNotification, object: nil)
   }
@@ -89,6 +94,15 @@ final class ChatRoomViewController: UIViewController {
     
     messageTextFieldBottomConstraint.constant = keyboardHeight + messageTextFieldBottomPadding
     scrollToBottom()
+  }
+  
+  @objc private func didUpdateUser() {
+    do {
+      try viewModel.refreshMessages()
+    } catch {
+      // TODO (dittmar): handle error
+    }
+    updateCurrentUserLabel()
   }
   
   @objc private func dismissKeyboardIfNecessary() {
@@ -107,7 +121,7 @@ final class ChatRoomViewController: UIViewController {
     messageTableView.dataSource = self
   }
   
-  @objc private func updateCurrentUserLabel() {
+  private func updateCurrentUserLabel() {
     DispatchQueue.main.async { [weak self] in
       self?.currentUserLabel.text = self?.viewModel.currentUsername
     }

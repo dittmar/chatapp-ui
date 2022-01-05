@@ -10,11 +10,11 @@ import UIKit
 
 extension UIViewController {
   func showErrorAlert(apiError: ApiError) {
-    let alert = UIAlertController(title: "Error", message: apiError.message, preferredStyle: .alert)
-    let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-    alert.addAction(alertAction)
-    
     DispatchQueue.main.async { [weak self] in
+      let alert = UIAlertController(title: "Error", message: apiError.message, preferredStyle: .alert)
+      let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+      alert.addAction(alertAction)
+      
       self?.present(alert, animated: true, completion: nil)
     }
   }
