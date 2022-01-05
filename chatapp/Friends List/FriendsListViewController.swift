@@ -96,7 +96,21 @@ extension FriendsListViewController: FriendsListViewModelDelegate {
   }
 }
 
-extension FriendsListViewController: UITableViewDelegate {}
+extension FriendsListViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    switch editingStyle {
+    case .delete:
+      let friend = friends[indexPath.row]
+      do {
+        try friendsListViewModel.deleteFriend(friendId: friend.friendId)
+      } catch {
+        // TODO (dittmar): handle errors
+      }
+    default:
+      break
+    }
+  }
+}
 
 extension FriendsListViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

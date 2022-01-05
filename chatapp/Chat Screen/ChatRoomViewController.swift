@@ -12,6 +12,14 @@ final class ChatRoomViewController: UIViewController {
   private lazy var viewModel = ChatRoomViewModel(delegate: self)
   
   @IBOutlet private weak var currentUserLabel: UILabel!
+  
+  @IBOutlet private var mainView: UIView! {
+    didSet {
+      let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboardIfNecessary))
+      mainView.addGestureRecognizer(tapGestureRecognizer)
+    }
+  }
+  
   @IBOutlet private weak var messageTableView: UITableView! {
     didSet {
       let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboardIfNecessary))
@@ -102,7 +110,6 @@ final class ChatRoomViewController: UIViewController {
           let keyboardHeight = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.height else { return }
     
     messageTextFieldBottomConstraint.constant = keyboardHeight + messageTextFieldBottomPadding
-    scrollToBottom()
   }
   
   @objc private func didUpdateUser() {
