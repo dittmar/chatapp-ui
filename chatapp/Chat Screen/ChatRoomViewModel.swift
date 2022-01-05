@@ -35,6 +35,12 @@ class ChatRoomViewModel {
     self.delegate = delegate
   }
   
+  func handleDeletedFriend(friendId: Int) throws {
+    if selectedFriendId == friendId {
+      try reset()
+    }
+  }
+  
   func loadDirectMessages(senderId: Int, receiverId: Int) throws {
     try MessageEndpoint.listMessagesDirect(senderId: senderId, receiverId: receiverId).invoke(onSuccess: { [weak self] response in
       self?.updateMessages(response)

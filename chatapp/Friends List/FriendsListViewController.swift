@@ -9,6 +9,7 @@
 import UIKit
 
 protocol FriendsListViewControllerDelegate: AnyObject {
+  func didDeleteFriend(friendId: Int)
   func didTapFriend(friendId: Int)
 }
 
@@ -81,6 +82,8 @@ extension FriendsListViewController: FriendsListViewModelDelegate {
     DispatchQueue.main.async { [weak self] in
       self?.friendsTableView.reloadData()
     }
+    
+    delegate?.didDeleteFriend(friendId: friendId)
   }
   
   func didUpdateFriends(_ friends: [Friend]) {

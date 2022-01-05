@@ -180,6 +180,14 @@ extension ChatRoomViewController: ChatRoomViewModelDelegate {
 }
 
 extension ChatRoomViewController: FriendsListViewControllerDelegate {
+  func didDeleteFriend(friendId: Int) {
+    do {
+      try viewModel.handleDeletedFriend(friendId: friendId)
+    } catch {
+      // TODO (dittmar): handle error
+    }
+  }
+  
   func didTapFriend(friendId: Int) {
     guard let senderId = LocalStorage.user?.id else { return }
     do {
