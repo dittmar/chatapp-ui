@@ -84,6 +84,14 @@ final class ChatRoomViewController: UIViewController {
 }
 
 extension ChatRoomViewController: ChatRoomViewModelDelegate {
+  func didSendMessage() {
+    do {
+      try viewModel.refreshMessages()
+    } catch {
+      // TODO (dittmar): handle error
+    }
+  }
+  
   func shouldShowLogin() {
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }
@@ -94,7 +102,9 @@ extension ChatRoomViewController: ChatRoomViewModelDelegate {
   
   func didLoadMessages() {
     DispatchQueue.main.async { [weak self] in
-      self?.messageTableView.reloadData()
+      guard let self = self else { return }
+      self.messageTableView.reloadData()
+      self.messageTableView.setContentOffset(CGPoint(x: 0, y: self.messageTableView.contentSize.height), animated: true)
     }
   }
   
